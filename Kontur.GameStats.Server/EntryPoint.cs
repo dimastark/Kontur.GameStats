@@ -1,5 +1,6 @@
 ﻿using System;
 using Fclp;
+using Nancy.Hosting.Self;
 
 namespace Kontur.GameStats.Server
 {
@@ -28,11 +29,15 @@ namespace Kontur.GameStats.Server
 
         private static void RunServer(Options options)
         {
-            using (var server = new StatServer())
-            {
-                server.Start(options.Prefix);
+            var uri = new Uri(options.Prefix.Replace("+", "localhost"));
 
-                Console.ReadKey(true);
+            using (var host = new NancyHost(uri))
+            {
+                host.Start();
+
+                Console.WriteLine("GameStats Server is running on " + uri);
+                Console.WriteLine("Press [Enter] to close the host.");
+                Console.ReadLine();
             }
         }
 

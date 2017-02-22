@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D0D79B41-39D6-496A-B74A-C8DFDDF4D7B8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{067456C0-086C-46A8-B37F-1405717B7BFC}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kontur.GameStats.Server</RootNamespace>
-    <AssemblyName>Kontur.GameStats.Server</AssemblyName>
+    <RootNamespace>Kontur.GameStats.Testing</RootNamespace>
+    <AssemblyName>Kontur.GameStats.Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,12 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentCommandLineParser, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentCommandLineParser.1.4.3\lib\net35\FluentCommandLineParser.dll</HintPath>
+    <Reference Include="CsQuery, Version=1.3.3.249, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -47,58 +42,45 @@
       <HintPath>..\packages\LiteDB.3.0.1\lib\net35\LiteDB.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.JScript" />
     <Reference Include="Nancy, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nancy.1.4.3\lib\net40\Nancy.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Nancy.Hosting.Self, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nancy.Hosting.Self.1.4.1\lib\net40\Nancy.Hosting.Self.dll</HintPath>
+    <Reference Include="Nancy.Testing, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.Testing.1.4.1\lib\net40\Nancy.Testing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Nancy.Validation.FluentValidation, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nancy.Validation.FluentValidation.1.4.1\lib\net40\Nancy.Validation.FluentValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\LiteDatabaseExtensions.cs" />
-    <Compile Include="Data\LiteDatabaseProvider.cs" />
-    <Compile Include="Data\GameDbProcessor.cs" />
-    <Compile Include="Data\IDatabaseProvider.cs" />
-    <Compile Include="Models\Reports\PlayerReport.cs" />
-    <Compile Include="Models\Stats\PlayerStats.cs" />
-    <Compile Include="Models\Info\ServerInfo.cs" />
-    <Compile Include="Models\Info\MatchInfo.cs" />
-    <Compile Include="Models\Info\GameMatch.cs" />
-    <Compile Include="Models\Info\PlayerScore.cs" />
-    <Compile Include="Models\Info\GameServer.cs" />
-    <Compile Include="Models\Reports\ServerReport.cs" />
-    <Compile Include="Models\Stats\ServerStats.cs" />
-    <Compile Include="Modules\BaseNancyModule.cs" />
-    <Compile Include="Modules\Logging\ExceptionLogger.cs" />
-    <Compile Include="Modules\Logging\Logger.cs" />
-    <Compile Include="Modules\Logging\ILogger.cs" />
-    <Compile Include="Modules\StatsApi.cs" />
-    <Compile Include="Modules\ReportsApi.cs" />
-    <Compile Include="Modules\InfoApi.cs" />
-    <Compile Include="EntryPoint.cs" />
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="Bootstrap\TestsBootstrapper.cs" />
+    <Compile Include="ReportTests\BestPlayersTests.cs" />
+    <Compile Include="ReportTests\RecentMatchesTests.cs" />
+    <Compile Include="StatTests\PlayerStatTests.cs" />
+    <Compile Include="TestsData.cs" />
+    <Compile Include="InfoTests\MatchInfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\QueryFormats.cs" />
-    <Compile Include="Validators\MatchInfoValidator.cs" />
-    <Compile Include="Validators\ServerInfoValidator.cs" />
+    <Compile Include="InfoTests\ServerInfoTests.cs" />
+    <Compile Include="StatTests\ServerStatTests.cs" />
+    <Compile Include="Bootstrap\TestDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kontur.GameStats.Server\Kontur.GameStats.Server.csproj">
+      <Project>{d0d79b41-39d6-496a-b74a-c8dfddf4d7b8}</Project>
+      <Name>Kontur.GameStats.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
